@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width+device-width, initial-scale=1">
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="start-screens">
+      <div class="div">
+        <div class="overlap">
+          <div class="input-field"><img id="imageButton" class="send" src="send.svg" />
+            <input type="text" id="input-field" class="input_form" placeholder="Enter Here">
+          </div>
+          <div class="content">
+            <div class="box">
+              <div class="overlap-group"><p class="text-wrapper">“Explain why I have a headache” →</p></div>
+            </div>
+            <div class="overlap-wrapper">
+              <div class="overlap-group">
+                <p class="text-wrapper">“Any idea on why I have <br />severe backpain?” →</p>
+              </div>
+            </div>
+            <div class="overlap-group-wrapper">
+              <div class="overlap-group">
+                <p class="text-wrapper">Remembers what user said<br />earlier in the conversation</p>
+              </div>
+            </div>
+            <div class="box-2">
+              <div class="overlap-group">
+                <div class="text-wrapper">May occasionally generate<br />incorrect information</div>
+              </div>
+            </div>
+            <div class="box-3">
+              <div class="may-occasionally-wrapper">
+                <p class="may-occasionally">
+                  May occasionally produce<br />harmful instructions or biased<br />content
+                </p>
+              </div>
+            </div>
+            <div class="box-4">
+              <div class="overlap-group">
+                <p class="text-wrapper">Allows user to provide follow-<br />up corrections</p>
+              </div>
+            </div>
+            <img class="limitations" src="limitations.png" />
+            <div class="text-wrapper-2">Examples</div>
+            <div class="text-wrapper-3">Capabilities</div>
+            <div class="text-wrapper-4">Limitations</div>
+            <img class="flash" src="flash.svg" />
+            <img class="contrast" src="contrast.png" />
+          </div>
+        </div>
+        <div class="left-sidebar">
+          <img class="line" src="line.svg" />
+          <div class="line-wrapper"><img class="img" src="line.svg" /></div>
+          <div class="chatbot-definition">
+            <div class="overlap-group-2">
+              <div class="text-wrapper-5"></div>
+              <img class="message" src="message.png" />
+              <img class="pen" src="pen.png" />
+              <img class="delete" src="delete.png" />
+            </div>
+          </div>
+          
+          <div class="overlap-3">
+            <div class="text-wrapper-7">My Chats</div>
+            <div class="rectangle-2"></div>
+          </div>
+          <div class="text-wrapper-8">HealthHelp</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementById("imageButton").addEventListener("click", function() {
+          const userInput = document.getElementById("input-field").value;
+          fetch('/image_click', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ userInput: userInput })
+          })
+          .then(response => response.json())
+          .then(data => {
+              const botResponse = data.bot_response;
+              document.getElementById("response").innerHTML = "Chatbot: " + botResponse;
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  </script>
+  </body>
+</html>
